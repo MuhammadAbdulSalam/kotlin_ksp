@@ -1,0 +1,17 @@
+[versions]
+android-gradle-plugin = "8.0.2"
+kotlin = "1.8.21"
+ksp = "1.8.21-1.0.11"
+kotlin-jvm = "1.6.10"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+android-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }
+java-library = { id = "java-library" }
+
+
+[libraries]
+google-ksp = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }

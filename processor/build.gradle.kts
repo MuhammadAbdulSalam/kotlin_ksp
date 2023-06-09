@@ -1,7 +1,5 @@
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-    id("kotlin")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 java {
@@ -11,5 +9,5 @@ java {
 
 dependencies {
     implementation(project(":annotations"))
-    implementation("com.google.devtools.ksp:symbol-processing-api:1.8.21-1.0.11")
+    implementation(libs.google.ksp)
 }

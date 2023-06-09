@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.kotlin)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -21,6 +21,7 @@ android {
         }
     }
 
+    @Suppress("UnstableApiUsage")
     buildTypes {
         get("release").apply {
             proguardFiles(
@@ -45,7 +46,6 @@ android {
 
 }
 
-// Makes generated code visible to IDE
 kotlin.sourceSets.main {
     kotlin.srcDirs(
         file("build/generated/ksp/debug/kotlin"),
@@ -53,8 +53,6 @@ kotlin.sourceSets.main {
 }
 
 ksp {
-    // Passing an argument to the symbol processor.
-    // Change value to "true" in order to apply the argument.
     arg("ignoreGenericArgs", "false")
 }
 

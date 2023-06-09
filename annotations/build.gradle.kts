@@ -1,12 +1,8 @@
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-    id("kotlin")
+    alias(libs.plugins.kotlin.jvm)
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
 }
-
-dependencies {}
