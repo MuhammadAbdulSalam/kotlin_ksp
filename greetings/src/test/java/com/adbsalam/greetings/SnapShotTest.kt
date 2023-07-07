@@ -11,7 +11,6 @@ import org.junit.Rule
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
-
 @RunWith(JUnit4::class)
 class SnapShotTest { 
 
@@ -21,25 +20,23 @@ class SnapShotTest {
     @Test
     fun snapShotGreetingPreview() {
         paparazzi.captureScreenshot { 
-            CompositionLocalProvider(LocalInspectionMode provides true) {
-                GreetingPreview()
-            }
+            GreetingPreview() 
         }
     }
 
     @Test
     fun snapShotGreetingPreviewSecond() {
         paparazzi.captureScreenshot { 
-            CompositionLocalProvider(LocalInspectionMode provides true) {
-                GreetingPreviewSecond()
-            }
+            GreetingPreviewSecond() 
         }
     }
 
     @Test
     fun snapShotGreetingsThirdPreview() {
         paparazzi.captureScreenshot { 
-            GreetingsThirdPreview() 
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                GreetingsThirdPreview()
+            }
         }
     }
 }

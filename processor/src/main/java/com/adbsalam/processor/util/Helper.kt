@@ -41,7 +41,7 @@ internal fun fileHeader(isPreviewRequired: Boolean): String {
             "//import org.junit.Assert.*\n" +
             "//import org.junit.Rule\n" +
             "//import org.junit.runner.RunWith\n" +
-            "//import org.junit.runners.JUnit4\n\n\n" +
+            "//import org.junit.runners.JUnit4\n\n" +
             "//@RunWith(JUnit4::class)\n" +
             "//class SnapShotTest { \n\n" +
             "$space4//@get:Rule \n" +
