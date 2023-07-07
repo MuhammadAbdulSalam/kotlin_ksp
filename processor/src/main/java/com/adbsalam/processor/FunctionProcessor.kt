@@ -20,7 +20,7 @@ class FunctionProcessor(
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val symbols = resolver
-            .getSymbolsWithAnnotation("com.adbsalam.annotations.GenerateLogs")
+            .getSymbolsWithAnnotation("com.adbsalam.annotations.SnapIt")
             .filterIsInstance<KSFunctionDeclaration>()
 
         if (!symbols.iterator().hasNext()) return emptyList()
@@ -28,7 +28,7 @@ class FunctionProcessor(
         val file = codeGenerator.createNewFile(
             dependencies = Dependencies(false, *resolver.getAllFiles().toList().toTypedArray()),
             packageName = "com.adbsalam",
-            fileName = "GeneratedLogs"
+            fileName = "SnapShotTest"
         )
 
         file += "package com.adbsalam\n"
@@ -43,11 +43,11 @@ class FunctionProcessor(
             super.visitFunctionDeclaration(function, data)
 
             val annotation: KSAnnotation = function.annotations.first {
-                it.shortName.asString() == "GenerateLogs"
+                it.shortName.asString() == "SnapIt"
             }
 
             val tagArg: KSValueArgument =
-                annotation.arguments.first { arg -> arg.name?.asString() == "tag" }
+                annotation.arguments.first { arg -> arg.name?.asString() == "file" }
 
             val tag = tagArg.value as String
 
