@@ -31,8 +31,29 @@ class FunctionProcessor(
             fileName = "SnapShotTest"
         )
 
-        file += "package com.adbsalam\n"
+        //TODO use if needed
+//        val functionImports = symbols.map {
+//            "//import com.adbsalam.greetings.${it}"
+//        }
+//        functionImports.joinToString(separator = "\n") +
+
+
+        file += "//package com.adbsalam.greetings\n\n" +
+                "//import app.cash.paparazzi.Paparazzi\n" +
+                "//import com.adbsalam.testing.forScreen\n" +
+                "//import org.junit.Test\n" +
+                "//import org.junit.Assert.*\n" +
+                "//import org.junit.Rule\n" +
+                "//import org.junit.runner.RunWith\n" +
+                "//import org.junit.runners.JUnit4\n\n\n" +
+                "//@RunWith(JUnit4::class)\n" +
+                "//class SnapShotTest { \n\n" +
+                "    //@get:Rule \n" +
+                "    //val paparazzi = Paparazzi.forScreen()\n"
+
         symbols.forEach { it.accept(Visitor(file), Unit) }
+
+        file += "//}"
         file.close()
         return symbols.filterNot { it.validate() }.toList()
     }
@@ -46,10 +67,10 @@ class FunctionProcessor(
                 it.shortName.asString() == "SnapIt"
             }
 
-            val tagArg: KSValueArgument =
-                annotation.arguments.first { arg -> arg.name?.asString() == "file" }
-
-            val tag = tagArg.value as String
+//            val tagArg: KSValueArgument =
+//                annotation.arguments.first { arg -> arg.name?.asString() == "file" }
+//
+//            val tag = tagArg.value as String
 
             val args = function.parameters
 
@@ -60,9 +81,12 @@ class FunctionProcessor(
             }
 
             file += "\n"
-            file += "fun print${function}(){\n"
-            file += "   println( \" $tag ##-> ${function}() have ${args.size} parameters, $paramNames\" )\n"
-            file += "}\n"
+            file += "    //@Test\n"
+            file += "    //fun snapShot${function}(){\n"
+            file += "        //paparazzi.snapshot { \n"
+            file += "           //$function() \n"
+            file += "        //}\n"
+            file += "    //}\n"
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.adbsalam.greetings
+package com.adbsalam.testing
 
 import org.junit.Test
 

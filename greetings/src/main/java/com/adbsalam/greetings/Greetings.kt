@@ -6,7 +6,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.adbsalam.annotations.SnapIt
 
-@SnapIt(file = "GreetingsLogs")
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -15,9 +14,16 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+@SnapIt
 @Preview(showBackground = true)
-@SnapIt(file = "GreetingsPreview")
 @Composable
-private fun GreetingPreview() {
+fun GreetingPreview() {
     Greeting("Android")
+}
+
+@SnapIt
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreviewSecond() {
+    Greeting("SecondGreeting")
 }

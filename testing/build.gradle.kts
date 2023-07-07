@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
-    alias(libs.plugins.kotlin.ksp)
-    alias(libs.plugins.paparazzi)
 }
 
 android {
-    namespace = "com.adbsalam.greetings"
+    namespace = "com.adbsalam.testing"
     compileSdk = 33
 
     defaultConfig {
@@ -28,28 +26,7 @@ android {
     }
 }
 
-kotlin.sourceSets.main {
-    kotlin.srcDirs(
-        file("build/generated/ksp/debug/kotlin"),
-    )
-}
-
-ksp {
-    arg("ignoreGenericArgs", "false")
-}
-
-tasks.register("generateSnaps") {
-    copy {
-        from("build/generated/ksp/debug/kotlin/com/adbsalam")
-        into("src/test/java/com/adbsalam/greetings")
-        filter { line -> line.replace("//", "") }
-    }
-}
-
 dependencies {
-    ksp(project(":processor"))
-    implementation(project(":annotations"))
-
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.runtime)
     implementation(libs.compose.foundation)
@@ -57,7 +34,5 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material.icons.extended)
     implementation(libs.compose.material.three)
-    implementation(libs.junit)
-    testImplementation(project(":testing"))
-
+    implementation(libs.paparazzi)
 }
