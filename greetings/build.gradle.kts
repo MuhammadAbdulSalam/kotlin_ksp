@@ -39,10 +39,14 @@ ksp {
 }
 
 tasks.register("generateSnaps") {
-    copy {
-        from("build/generated/ksp/debug/kotlin/com/adbsalam")
-        into("src/test/java/com/adbsalam/greetings")
-        filter { line -> line.replace("//", "") }
+    dependsOn("assembleDebug")
+
+    doLast {
+        copy {
+            from("build/generated/ksp/debug/kotlin/com/adbsalam")
+            into("src/test/java/com/adbsalam/greetings")
+            filter { line -> line.replace("//", "") }
+        }
     }
 }
 

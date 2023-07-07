@@ -2,6 +2,13 @@
 
 package com.adbsalam.processor
 
+import com.adbsalam.annotations.ANNOTATION_PACKAGE_NAME
+import com.adbsalam.processor.util.FILE_NAME
+import com.adbsalam.processor.util.PACKAGE_NAME
+import com.adbsalam.processor.util.fileFooter
+import com.adbsalam.processor.util.fileHeader
+import com.adbsalam.processor.util.requirePreviewContext
+import com.adbsalam.processor.util.testMethods
 import com.google.devtools.ksp.processing.*
 import com.google.devtools.ksp.symbol.*
 import com.google.devtools.ksp.symbol.Variance.*
@@ -18,75 +25,34 @@ class FunctionProcessor(
         this.write(str.toByteArray())
     }
 
-    override fun process(resolver: Resolver): List<KSAnnotated> {
+    override fun process(
+        resolver: Resolver
+    ): List<KSAnnotated> {
         val symbols = resolver
-            .getSymbolsWithAnnotation("com.adbsalam.annotations.SnapIt")
+            .getSymbolsWithAnnotation(ANNOTATION_PACKAGE_NAME)
             .filterIsInstance<KSFunctionDeclaration>()
 
         if (!symbols.iterator().hasNext()) return emptyList()
 
         val file = codeGenerator.createNewFile(
             dependencies = Dependencies(false, *resolver.getAllFiles().toList().toTypedArray()),
-            packageName = "com.adbsalam",
-            fileName = "SnapShotTest"
+            packageName = PACKAGE_NAME,
+            fileName = FILE_NAME
         )
 
-        //TODO use if needed
-//        val functionImports = symbols.map {
-//            "//import com.adbsalam.greetings.${it}"
-//        }
-//        functionImports.joinToString(separator = "\n") +
-
-
-        file += "//package com.adbsalam.greetings\n\n" +
-                "//import app.cash.paparazzi.Paparazzi\n" +
-                "//import com.adbsalam.testing.forScreen\n" +
-                "//import org.junit.Test\n" +
-                "//import org.junit.Assert.*\n" +
-                "//import org.junit.Rule\n" +
-                "//import org.junit.runner.RunWith\n" +
-                "//import org.junit.runners.JUnit4\n\n\n" +
-                "//@RunWith(JUnit4::class)\n" +
-                "//class SnapShotTest { \n\n" +
-                "    //@get:Rule \n" +
-                "    //val paparazzi = Paparazzi.forScreen()\n"
-
+        file += fileHeader(isPreviewRequired = symbols.any { requirePreviewContext(it) })
         symbols.forEach { it.accept(Visitor(file), Unit) }
-
-        file += "//}"
+        file += fileFooter
         file.close()
         return symbols.filterNot { it.validate() }.toList()
     }
 
-    inner class Visitor(private val file: OutputStream) : KSVisitorVoid() {
-
+    inner class Visitor(
+        private val file: OutputStream
+    ) : KSVisitorVoid() {
         override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Unit) {
             super.visitFunctionDeclaration(function, data)
-
-            val annotation: KSAnnotation = function.annotations.first {
-                it.shortName.asString() == "SnapIt"
-            }
-
-//            val tagArg: KSValueArgument =
-//                annotation.arguments.first { arg -> arg.name?.asString() == "file" }
-//
-//            val tag = tagArg.value as String
-
-            val args = function.parameters
-
-            var paramNames = ""
-
-            args.forEach {
-                paramNames += ", $it "
-            }
-
-            file += "\n"
-            file += "    //@Test\n"
-            file += "    //fun snapShot${function}(){\n"
-            file += "        //paparazzi.snapshot { \n"
-            file += "           //$function() \n"
-            file += "        //}\n"
-            file += "    //}\n"
+            file += testMethods(function)
         }
     }
 }

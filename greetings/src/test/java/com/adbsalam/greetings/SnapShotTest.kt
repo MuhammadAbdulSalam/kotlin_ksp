@@ -3,6 +3,8 @@ package com.adbsalam.greetings
 import app.cash.paparazzi.Paparazzi
 import com.adbsalam.testing.forScreen
 import org.junit.Test
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalInspectionMode
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.runner.RunWith
@@ -16,16 +18,27 @@ class SnapShotTest {
     val paparazzi = Paparazzi.forScreen()
 
     @Test
-    fun snapShotGreetingPreview(){
+    fun snapShotGreetingPreview() {
         paparazzi.snapshot { 
-           GreetingPreview() 
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                GreetingPreview()
+            }
         }
     }
 
     @Test
-    fun snapShotGreetingPreviewSecond(){
+    fun snapShotGreetingPreviewSecond() {
         paparazzi.snapshot { 
-           GreetingPreviewSecond() 
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                GreetingPreviewSecond()
+            }
+        }
+    }
+
+    @Test
+    fun snapShotGreetingsThirdPreview() {
+        paparazzi.snapshot { 
+            GreetingsThirdPreview() 
         }
     }
 }

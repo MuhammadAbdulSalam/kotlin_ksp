@@ -14,16 +14,23 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@SnapIt
+@SnapIt(preview = true)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Greeting("Android")
 }
 
-@SnapIt
+@SnapIt(preview = true)
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreviewSecond() {
     Greeting("SecondGreeting")
+}
+
+@SnapIt
+@Preview
+@Composable
+fun GreetingsThirdPreview(){
+    Greeting(name = "SomeOtherPreview")
 }
