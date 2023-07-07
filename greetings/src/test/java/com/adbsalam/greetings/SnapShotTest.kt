@@ -2,6 +2,7 @@ package com.adbsalam.greetings
 
 import app.cash.paparazzi.Paparazzi
 import com.adbsalam.testing.forScreen
+import com.adbsalam.testing.captureScreenshot
 import org.junit.Test
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -19,7 +20,7 @@ class SnapShotTest {
 
     @Test
     fun snapShotGreetingPreview() {
-        paparazzi.snapshot { 
+        paparazzi.captureScreenshot { 
             CompositionLocalProvider(LocalInspectionMode provides true) {
                 GreetingPreview()
             }
@@ -28,7 +29,7 @@ class SnapShotTest {
 
     @Test
     fun snapShotGreetingPreviewSecond() {
-        paparazzi.snapshot { 
+        paparazzi.captureScreenshot { 
             CompositionLocalProvider(LocalInspectionMode provides true) {
                 GreetingPreviewSecond()
             }
@@ -37,8 +38,10 @@ class SnapShotTest {
 
     @Test
     fun snapShotGreetingsThirdPreview() {
-        paparazzi.snapshot { 
-            GreetingsThirdPreview() 
+        paparazzi.captureScreenshot { 
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                GreetingsThirdPreview()
+            }
         }
     }
 }

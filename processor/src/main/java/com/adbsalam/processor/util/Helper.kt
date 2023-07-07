@@ -35,6 +35,7 @@ internal fun fileHeader(isPreviewRequired: Boolean): String {
     return "//package com.adbsalam.greetings\n\n" +
             "//import app.cash.paparazzi.Paparazzi\n" +
             "//import com.adbsalam.testing.forScreen\n" +
+            "//import com.adbsalam.testing.captureScreenshot\n" +
             "//import org.junit.Test\n" +
             previewImports(isPreviewRequired) +
             "//import org.junit.Assert.*\n" +
@@ -58,7 +59,7 @@ fun testMethods(function: KSFunctionDeclaration): String {
     return "\n" +
             "$space4//@Test\n" +
             "$space4//fun snapShot${function}() {\n" +
-            "$space4$space4//paparazzi.snapshot { \n" +
+            "$space4$space4//paparazzi.captureScreenshot { \n" +
             previewContextCmd +
             "$space4$space4//}\n" +
             "$space4//}\n"
