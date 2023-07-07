@@ -38,7 +38,12 @@ ksp {
     arg("ignoreGenericArgs", "false")
 }
 
-tasks.register("generateSnaps") {
+tasks.register("generateSnapIt"){
+    dependsOn("generateSnapItTests")
+    dependsOn("recordPaparazzi")
+}
+
+tasks.register("generateSnapItTests") {
     dependsOn("assembleDebug")
     doLast{
         copy {

@@ -28,7 +28,7 @@ fun GreetingPreviewSecond() {
     Greeting("SecondGreeting")
 }
 
-@SnapIt(preview = true)
+@SnapIt(preview = false)
 @Preview
 @Composable
 fun GreetingsThirdPreview(){

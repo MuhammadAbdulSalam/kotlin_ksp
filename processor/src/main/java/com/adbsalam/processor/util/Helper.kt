@@ -34,8 +34,8 @@ internal fun previewImports(isPreviewRequired: Boolean): String {
 internal fun fileHeader(isPreviewRequired: Boolean): String {
     return "//package com.adbsalam.greetings\n\n" +
             "//import app.cash.paparazzi.Paparazzi\n" +
-            "//import com.adbsalam.testing.forScreen\n" +
             "//import com.adbsalam.testing.captureScreenshot\n" +
+            "//import com.adbsalam.testing.forComponent\n" +
             "//import org.junit.Test\n" +
             previewImports(isPreviewRequired) +
             "//import org.junit.Assert.*\n" +
@@ -45,7 +45,7 @@ internal fun fileHeader(isPreviewRequired: Boolean): String {
             "//@RunWith(JUnit4::class)\n" +
             "//class SnapShotTest { \n\n" +
             "$space4//@get:Rule \n" +
-            "$space4//val paparazzi = Paparazzi.forScreen()\n"
+            "$space4//val paparazzi = Paparazzi.forComponent()\n"
 }
 
 fun testMethods(function: KSFunctionDeclaration): String {
