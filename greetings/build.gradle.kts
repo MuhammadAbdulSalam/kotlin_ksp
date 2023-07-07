@@ -30,7 +30,7 @@ android {
 
 kotlin.sourceSets.main {
     kotlin.srcDirs(
-        file("build/generated/ksp/debug/kotlin"),
+        file("build/generated/ksp/kotlin"),
     )
 }
 
@@ -40,14 +40,14 @@ ksp {
 
 tasks.register("generateSnaps") {
     dependsOn("assembleDebug")
-
-    doLast {
-        copy {
-            from("build/generated/ksp/debug/kotlin/com/adbsalam")
-            into("src/test/java/com/adbsalam/greetings")
-            filter { line -> line.replace("//", "") }
-        }
+    copy {
+        from("build/generated/ksp/kotlin/com/adbsalam")
+        into("src/test/java/com/adbsalam/greetings")
+        filter { line -> line.replace("//", "") }
+        delete("build/generated/ksp/debug/kotlin/com/adbsalam")
     }
+    dependsOn("recordPaparazzi")
+
 }
 
 dependencies {
