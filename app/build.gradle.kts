@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.paparazzi) apply false
 }
 
 android {

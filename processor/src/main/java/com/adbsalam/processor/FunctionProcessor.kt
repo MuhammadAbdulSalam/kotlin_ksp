@@ -39,7 +39,6 @@ class FunctionProcessor(
 
     inner class Visitor(private val file: OutputStream) : KSVisitorVoid() {
 
-
         override fun visitFunctionDeclaration(function: KSFunctionDeclaration, data: Unit) {
             super.visitFunctionDeclaration(function, data)
 
