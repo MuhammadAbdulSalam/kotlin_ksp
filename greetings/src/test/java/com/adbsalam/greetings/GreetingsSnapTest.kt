@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class SnapShotTest { 
+class GreetingsSnapTest { 
 
     @get:Rule 
     val paparazzi = Paparazzi.forComponent()
@@ -27,7 +27,9 @@ class SnapShotTest {
     @Test
     fun snapShotGreetingPreviewSecond() {
         paparazzi.captureScreenshot { 
-            GreetingPreviewSecond() 
+            CompositionLocalProvider(LocalInspectionMode provides true) {
+                GreetingPreviewSecond()
+            }
         }
     }
 

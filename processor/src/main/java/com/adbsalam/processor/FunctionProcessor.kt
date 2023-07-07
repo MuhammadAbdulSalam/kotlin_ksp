@@ -3,10 +3,10 @@
 package com.adbsalam.processor
 
 import com.adbsalam.annotations.ANNOTATION_PACKAGE_NAME
-import com.adbsalam.processor.util.FILE_NAME
 import com.adbsalam.processor.util.PACKAGE_NAME
 import com.adbsalam.processor.util.fileFooter
 import com.adbsalam.processor.util.fileHeader
+import com.adbsalam.processor.util.fileName
 import com.adbsalam.processor.util.requirePreviewContext
 import com.adbsalam.processor.util.testMethods
 import com.google.devtools.ksp.processing.*
@@ -34,13 +34,18 @@ class FunctionProcessor(
 
         if (!symbols.iterator().hasNext()) return emptyList()
 
+        val fileName = fileName(symbols.first())
+
         val file = codeGenerator.createNewFile(
             dependencies = Dependencies(false, *resolver.getAllFiles().toList().toTypedArray()),
             packageName = PACKAGE_NAME,
-            fileName = FILE_NAME
+            fileName = fileName
         )
 
-        file += fileHeader(isPreviewRequired = symbols.any { requirePreviewContext(it) })
+        file += fileHeader(
+            isPreviewRequired = symbols.any { requirePreviewContext(it) },
+            fileName = fileName
+        )
         symbols.forEach { it.accept(Visitor(file), Unit) }
         file += fileFooter
         file.close()

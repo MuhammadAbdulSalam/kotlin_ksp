@@ -21,7 +21,7 @@ fun GreetingPreview() {
     Greeting("Android")
 }
 
-@SnapIt
+@SnapIt(preview = true)
 @Preview
 @Composable
 fun GreetingPreviewSecond() {

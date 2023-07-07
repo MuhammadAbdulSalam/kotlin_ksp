@@ -6,7 +6,7 @@ import com.google.devtools.ksp.symbol.KSValueArgument
 
 
 const val PACKAGE_NAME = "com.adbsalam"
-const val FILE_NAME = "SnapShotTest"
+const val TEMP_FILE_NAME = "SnapShotTest"
 
 internal fun requirePreviewContext(
     function: KSFunctionDeclaration
@@ -31,7 +31,7 @@ internal fun previewImports(isPreviewRequired: Boolean): String {
     }
 }
 
-internal fun fileHeader(isPreviewRequired: Boolean): String {
+internal fun fileHeader(isPreviewRequired: Boolean, fileName: String): String {
     return "//package com.adbsalam.greetings\n\n" +
             "//import app.cash.paparazzi.Paparazzi\n" +
             "//import com.adbsalam.testing.captureScreenshot\n" +
@@ -43,7 +43,7 @@ internal fun fileHeader(isPreviewRequired: Boolean): String {
             "//import org.junit.runner.RunWith\n" +
             "//import org.junit.runners.JUnit4\n\n" +
             "//@RunWith(JUnit4::class)\n" +
-            "//class SnapShotTest { \n\n" +
+            "//class $fileName { \n\n" +
             "$space4//@get:Rule \n" +
             "$space4//val paparazzi = Paparazzi.forComponent()\n"
 }
@@ -65,7 +65,10 @@ fun testMethods(function: KSFunctionDeclaration): String {
             "$space4//}\n"
 }
 
-internal val fileFooter = "//}"
-internal val space4 = "    "
+fun fileName(function: KSFunctionDeclaration): String {
+    return function.containingFile?.fileName?.replace(".kt", "SnapTest")?: TEMP_FILE_NAME
+}
+internal const val fileFooter = "//}"
+internal const val space4 = "    "
 
 

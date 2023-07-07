@@ -38,12 +38,12 @@ ksp {
     arg("ignoreGenericArgs", "false")
 }
 
-tasks.register("generateSnapIt"){
-    dependsOn("generateSnapItTests")
+tasks.register("snapItRecord"){
+    dependsOn("snapItGenerate")
     dependsOn("recordPaparazzi")
 }
 
-tasks.register("generateSnapItTests") {
+tasks.register("snapItGenerate") {
     dependsOn("assembleDebug")
     doLast{
         copy {
@@ -51,6 +51,7 @@ tasks.register("generateSnapItTests") {
             into("src/test/java/com/adbsalam/greetings")
             filter { line -> line.replace("//", "") }
         }
+        delete("build/generated/ksp/debug/kotlin/com/adbsalam")
     }
 }
 
