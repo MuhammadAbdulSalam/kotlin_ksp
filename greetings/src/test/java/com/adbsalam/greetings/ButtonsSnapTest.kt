@@ -12,32 +12,25 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
-class Greetings { 
+class Buttons { 
 
     @get:Rule 
     val paparazzi = Paparazzi.forComponent()
 
     @Test
-    fun snapShotGreetingPreview() {
-        paparazzi.captureScreenshot { 
-            GreetingPreview() 
-        }
-    }
-
-    @Test
-    fun snapShotGreetingPreviewSecond() {
+    fun snapShotButtonsPreview() {
         paparazzi.captureScreenshot { 
             CompositionLocalProvider(LocalInspectionMode provides true) {
-                GreetingPreviewSecond()
+                ButtonsPreview()
             }
         }
     }
 
     @Test
-    fun snapShotGreetingsThirdPreview() {
+    fun snapShotButtonsPreviewSecond() {
         paparazzi.captureScreenshot { 
             CompositionLocalProvider(LocalInspectionMode provides true) {
-                GreetingsThirdPreview()
+                ButtonsPreviewSecond()
             }
         }
     }

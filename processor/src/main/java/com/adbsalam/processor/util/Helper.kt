@@ -7,6 +7,7 @@ import com.google.devtools.ksp.symbol.KSValueArgument
 
 const val PACKAGE_NAME = "com.adbsalam"
 const val TEMP_FILE_NAME = "SnapShotTest"
+const val UNKNOWN_FILE = "UnknownFileName"
 
 internal fun requirePreviewContext(
     function: KSFunctionDeclaration

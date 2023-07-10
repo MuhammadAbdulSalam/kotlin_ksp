@@ -4,6 +4,7 @@ package com.adbsalam.processor
 
 import com.adbsalam.annotations.ANNOTATION_PACKAGE_NAME
 import com.adbsalam.processor.util.PACKAGE_NAME
+import com.adbsalam.processor.util.UNKNOWN_FILE
 import com.adbsalam.processor.util.fileFooter
 import com.adbsalam.processor.util.fileHeader
 import com.adbsalam.processor.util.fileName
@@ -34,21 +35,30 @@ class FunctionProcessor(
 
         if (!symbols.iterator().hasNext()) return emptyList()
 
-        val fileName = fileName(symbols.first())
+        val fileNames = symbols.map { it.containingFile?.fileName ?: UNKNOWN_FILE }.toSet()
 
-        val file = codeGenerator.createNewFile(
-            dependencies = Dependencies(false, *resolver.getAllFiles().toList().toTypedArray()),
-            packageName = PACKAGE_NAME,
-            fileName = fileName
-        )
+        fileNames.forEach { currentFile ->
 
-        file += fileHeader(
-            isPreviewRequired = symbols.any { requirePreviewContext(it) },
-            fileName = fileName
-        )
-        symbols.forEach { it.accept(Visitor(file), Unit) }
-        file += fileFooter
-        file.close()
+            val fileName = currentFile.replace(".kt", "")
+
+            val currentFileSymbols = symbols.filter { it.containingFile?.fileName == currentFile }
+
+            val file = codeGenerator.createNewFile(
+                dependencies = Dependencies(false, *resolver.getAllFiles().toList().toTypedArray()),
+                packageName = PACKAGE_NAME,
+                fileName = "${fileName}SnapTest"
+            )
+
+            file += fileHeader(
+                isPreviewRequired = currentFileSymbols.any { requirePreviewContext(it) },
+                fileName = fileName
+            )
+
+            currentFileSymbols.forEach { it.accept(Visitor(file), Unit) }
+            file += fileFooter
+            file.close()
+        }
+
         return symbols.filterNot { it.validate() }.toList()
     }
 
