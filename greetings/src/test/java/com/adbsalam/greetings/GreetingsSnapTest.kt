@@ -5,7 +5,6 @@
  import app.cash.paparazzi.Paparazzi
  import com.adbsalam.testing.captureScreenshot
  import com.adbsalam.testing.forComponent
- import kotlin.jvm.JvmField
  import org.junit.Rule
  import org.junit.Test
  import org.junit.runner.RunWith
@@ -13,8 +12,7 @@
 
  @RunWith(JUnit4::class)
  class GreetingsSnapTest {
-   @JvmField
-   @Rule
+   @get:Rule
    val paparazzi: Paparazzi = Paparazzi.forComponent()
 
    @Test

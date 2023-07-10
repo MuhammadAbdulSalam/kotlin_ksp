@@ -20,8 +20,9 @@ internal fun jUnitClass(
     val runWith =
         AnnotationSpec.builder(RunWith::class).addMember("JUnit4::class").build()
 
-    val ruleAnnotation = AnnotationSpec.builder(Rule::class).build()
-    val jvmAnnotation = AnnotationSpec.builder(JvmField::class).build()
+    val ruleAnnotation = AnnotationSpec.builder(Rule::class).useSiteTarget(
+        AnnotationSpec.UseSiteTarget.GET
+    ).build()
 
     val codeBlock = CodeBlock.builder().add(
         "Paparazzi.forComponent()"
@@ -29,7 +30,6 @@ internal fun jUnitClass(
 
     val testRule = PropertySpec
         .builder("paparazzi", Paparazzi::class.java)
-        .addAnnotation(jvmAnnotation)
         .addAnnotation(ruleAnnotation)
         .initializer(codeBlock)
         .build()
