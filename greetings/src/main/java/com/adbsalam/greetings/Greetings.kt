@@ -14,23 +14,23 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@SnapIt
 @Preview
 @Composable
+@SnapIt(name = "when not preview, Should says Android")
 fun GreetingPreview() {
     Greeting("Android")
 }
 
-@SnapIt(preview = true)
 @Preview
 @Composable
+@SnapIt(name = "when in preview, should say SecondGreeting", preview = true)
 fun GreetingPreviewSecond() {
     Greeting("SecondGreeting")
 }
 
-@SnapIt(preview = true)
 @Preview
 @Composable
+@SnapIt(name = "when in preview, should say Something", preview = true)
 fun GreetingsThirdPreview() {
     Greeting(name = "SomeOtherPreview")
 }

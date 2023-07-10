@@ -18,14 +18,14 @@
    val paparazzi: Paparazzi = Paparazzi.forComponent()
 
    @Test
-   fun greetingPreviewSnapTest() {
+   fun `when not preview, Should says Android`() {
      paparazzi.captureScreenshot {
          GreetingPreview()
      }
    }
 
    @Test
-   fun greetingPreviewSecondSnapTest() {
+   fun `when in preview, should say SecondGreeting`() {
      paparazzi.captureScreenshot {
          CompositionLocalProvider(LocalInspectionMode provides true) {
              GreetingPreviewSecond()
@@ -34,7 +34,7 @@
    }
 
    @Test
-   fun greetingsThirdPreviewSnapTest() {
+   fun `when in preview, should say Something`() {
      paparazzi.captureScreenshot {
          CompositionLocalProvider(LocalInspectionMode provides true) {
              GreetingsThirdPreview()
