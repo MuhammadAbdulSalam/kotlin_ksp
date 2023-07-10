@@ -38,3 +38,4 @@ compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-ui = { group = "androidx.test.ext", name = "junit", version.ref = "junit-ui" }
+kotlin-poet-ksp = { group = "com.squareup", name = "kotlinpoet-ksp", version = "1.14.2" }

@@ -51,7 +51,7 @@ tasks.register("snapItGenerate") {
             into("src/test/java/com/adbsalam/greetings")
             filter { line -> line.replace("//", "") }
         }
-        delete("build/generated/ksp/debug/kotlin/com/adbsalam")
+//        delete("build/generated/ksp/debug/kotlin/com/adbsalam")
     }
 }
 
