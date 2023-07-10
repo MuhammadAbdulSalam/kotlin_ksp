@@ -14,16 +14,14 @@ internal fun kFile(
     functions: Sequence<KSFunctionDeclaration>
 ): FileSpec.Builder {
 
+    val packageName = functions.first().containingFile?.packageName?.asString().toString()
+
     val file = FileSpec
-        .builder(PACKAGE_NAME, fileName)
+        .builder(packageName, fileName)
         .addImport(JUnit4::class, "")
         .addImport("app.cash.paparazzi", "Paparazzi")
         .addImport(PAPARAZZI_PACKAGE, "captureScreenshot")
         .addImport(PAPARAZZI_PACKAGE, "forComponent")
-
-    functions.forEach {
-        file.addImport(it.containingFile?.packageName?.asString().toString(), it.toString())
-    }
 
     if (previewImports) {
         file

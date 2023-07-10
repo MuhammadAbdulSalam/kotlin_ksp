@@ -79,6 +79,9 @@ class CodeWriter(
             .build()
             .toString()
             .replace("package none", "")
+            .replace("public ", "")
+            .replace(": Unit", "")
+            .replace(" import kotlin.Unit\n", "")
     }
 
     /**
