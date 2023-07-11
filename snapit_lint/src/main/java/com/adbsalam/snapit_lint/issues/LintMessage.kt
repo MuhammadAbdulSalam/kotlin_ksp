@@ -2,12 +2,6 @@ package com.adbsalam.snapit_lint.issues
 
 internal sealed class LintMessage(val msg: String)
 
-internal object DuplicateAnnotationMsg : LintMessage(
-    msg = """@SnapIt and @ScreenSnapIt cannot be used for same function
-        Please use either @SnapIt or @ScreenSnapIt for this function
-        Alternatively two functions can be used, one with @SnapIt and second with @ScreenSnapIt"""
-)
-
 internal data class ComposableRequiredMsg(val annotation: String) : LintMessage(
     msg = """@$annotation requires @Composable annotation
         @$annotation can only be used with Composable function""".trimMargin()

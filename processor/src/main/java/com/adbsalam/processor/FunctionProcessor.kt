@@ -1,7 +1,9 @@
 package com.adbsalam.processor
 
-import com.adbsalam.annotations.SnapAnnotations
-import com.adbsalam.processor.codewriter.CodeWriter
+import com.adbsalam.annotations.SNAP_IT_PACKAGE
+import com.adbsalam.processor.codewriter.AnnotationType
+import com.adbsalam.processor.codewriter.isScreenComponent
+import com.adbsalam.processor.codewriter.processSymbols
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
@@ -25,36 +27,38 @@ class FunctionProcessor(
         resolver: Resolver
     ): List<KSAnnotated> {
 
-        val componentSymbol = resolver
-            .getSymbolsWithAnnotation(SnapAnnotations.SNAP_IT.packageName)
+        val symbols = resolver
+            .getSymbolsWithAnnotation(SNAP_IT_PACKAGE)
             .filterIsInstance<KSFunctionDeclaration>()
 
-        val screenSymbol = resolver
-            .getSymbolsWithAnnotation(SnapAnnotations.SNAP_IT_SCREEN.packageName)
-            .filterIsInstance<KSFunctionDeclaration>()
+        if (!symbols.iterator().hasNext()) return emptyList()
 
-        if (!componentSymbol.iterator().hasNext()) return emptyList()
-
-        //Handle component symbols
-        CodeWriter(
-            symbols = componentSymbol,
-            codeGenerator = codeGenerator,
-            resolver = resolver,
-            annotation = SnapAnnotations.SNAP_IT
-        ).processSymbols()
-
-        //Handle screen symbols
-        if (screenSymbol.iterator().hasNext()) {
-            CodeWriter(
-                symbols = screenSymbol,
-                codeGenerator = codeGenerator,
-                resolver = resolver,
-                annotation = SnapAnnotations.SNAP_IT_SCREEN
-            ).processSymbols()
+        val componentSymbol = symbols.filter {
+            !isScreenComponent(it)
         }
 
-        val symbols = componentSymbol + screenSymbol
+        val screenSymbols = symbols.filter {
+            isScreenComponent(it)
+        }
+
+        if (componentSymbol.iterator().hasNext()) {
+            processSymbols(
+                symbols = componentSymbol,
+                codeGenerator = codeGenerator,
+                resolver = resolver,
+                annotation = AnnotationType.COMPONENT
+            )
+        }
+
+        if (screenSymbols.iterator().hasNext()) {
+            processSymbols(
+                symbols = screenSymbols,
+                codeGenerator = codeGenerator,
+                resolver = resolver,
+                annotation = AnnotationType.SCREEN
+            )
+        }
+
         return symbols.filterNot { it.validate() }.toList()
     }
-
 }

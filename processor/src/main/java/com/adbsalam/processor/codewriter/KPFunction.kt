@@ -1,7 +1,6 @@
 package com.adbsalam.processor.codewriter
 
-
-import com.adbsalam.annotations.SnapAnnotations
+import com.adbsalam.annotations.SNAP_IT
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSValueArgument
@@ -65,8 +64,7 @@ fun getMethodName(
     function: KSFunctionDeclaration
 ): String {
     val annotation: KSAnnotation = function.annotations.first {
-        it.shortName.asString() == SnapAnnotations.SNAP_IT.annotation ||
-                it.shortName.asString() == SnapAnnotations.SNAP_IT_SCREEN.annotation
+        it.shortName.asString() == SNAP_IT
     }
 
     val tagArg: KSValueArgument =

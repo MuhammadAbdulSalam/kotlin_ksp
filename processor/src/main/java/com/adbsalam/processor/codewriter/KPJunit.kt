@@ -1,7 +1,6 @@
 package com.adbsalam.processor.codewriter
 
 import app.cash.paparazzi.Paparazzi
-import com.adbsalam.annotations.SnapAnnotations
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.CodeBlock
@@ -14,7 +13,7 @@ import org.junit.runner.RunWith
 internal fun jUnitClass(
     fileName: String,
     symbols: Sequence<KSFunctionDeclaration>,
-    annotation: SnapAnnotations
+    annotation: AnnotationType
 ): TypeSpec {
 
     val snapFunctions = snapFunctions(symbols)
@@ -41,8 +40,8 @@ internal fun jUnitClass(
         .build()
 }
 
-private fun paparazziInitializer(annotation: SnapAnnotations): String {
-    return if (annotation == SnapAnnotations.SNAP_IT)
+private fun paparazziInitializer(annotation: AnnotationType): String {
+    return if (annotation == AnnotationType.COMPONENT)
         "Paparazzi.forComponent()"
     else
         "Paparazzi.forScreen()"

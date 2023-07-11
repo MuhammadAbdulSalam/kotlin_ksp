@@ -1,7 +1,6 @@
 package com.adbsalam.processor.codewriter
 
-import com.adbsalam.annotations.SnapAnnotations
-import com.adbsalam.annotations.SnapAnnotations.*
+import com.adbsalam.processor.codewriter.AnnotationType.COMPONENT
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.squareup.kotlinpoet.FileSpec
 import org.junit.runners.JUnit4
@@ -13,7 +12,7 @@ internal fun kFile(
     previewImports: Boolean,
     fileName: String,
     functions: Sequence<KSFunctionDeclaration>,
-    annotation: SnapAnnotations
+    annotation: AnnotationType
 ): FileSpec.Builder {
 
     val packageName = functions.first().containingFile?.packageName?.asString().toString()
@@ -33,5 +32,5 @@ internal fun kFile(
     return file
 }
 
-private fun paparazziInstanceImport(annotation: SnapAnnotations): String =
-    if (annotation == SNAP_IT) "forComponent" else "forScreen"
+private fun paparazziInstanceImport(annotation: AnnotationType): String =
+    if (annotation == COMPONENT) "forComponent" else "forScreen"

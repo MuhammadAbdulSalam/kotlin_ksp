@@ -2,7 +2,6 @@ package com.adbsalam.snapit_lint.issues
 
 import com.adbsalam.snapit_lint.helper.COMPOSABLE
 import com.adbsalam.snapit_lint.helper.SNAP_IT
-import com.adbsalam.snapit_lint.helper.SNAP_IT_SCREEN
 import com.adbsalam.snapit_lint.helper.byPackage
 import com.adbsalam.snapit_lint.issues.SnapItIssues.ISSUE
 import com.android.tools.lint.client.api.UElementHandler
@@ -16,17 +15,9 @@ class NodeVisitor(private val context: JavaContext) : UElementHandler() {
 
         if (node.annotations.isEmpty()) return
 
-        val isSnapIt =
-            node.annotations.firstOrNull {
-                it.qualifiedName == SNAP_IT.byPackage()
-                        || it.qualifiedName == SNAP_IT_SCREEN.byPackage()
-            } != null
-
-        val isSnapComponent =
-            node.annotations.firstOrNull { it.qualifiedName == SNAP_IT.byPackage() } != null
-
-        val isSnapScreen =
-            node.annotations.firstOrNull { it.qualifiedName == SNAP_IT_SCREEN.byPackage() } != null
+        val isSnapIt = node.annotations.firstOrNull {
+            it.qualifiedName == SNAP_IT.byPackage()
+        } != null
 
         val isComposable =
             node.annotations.firstOrNull { it.qualifiedName == COMPOSABLE } != null
@@ -37,13 +28,10 @@ class NodeVisitor(private val context: JavaContext) : UElementHandler() {
 
         if (isSnapIt) {
 
-            val annotation = if (isSnapComponent) SNAP_IT else SNAP_IT_SCREEN
-
             val lintMessage = when {
-                isSnapScreen && isSnapComponent -> DuplicateAnnotationMsg
-                !isComposable -> ComposableRequiredMsg(annotation)
-                hasParams -> ZeroArgumentRequiredMsg(annotation)
-                isPrivate -> PrivateModifierNotAllowed(annotation)
+                !isComposable -> ComposableRequiredMsg(SNAP_IT)
+                hasParams -> ZeroArgumentRequiredMsg(SNAP_IT)
+                isPrivate -> PrivateModifierNotAllowed(SNAP_IT)
                 else -> null
             }
 

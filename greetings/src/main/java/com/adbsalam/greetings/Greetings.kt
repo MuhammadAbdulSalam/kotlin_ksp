@@ -4,7 +4,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.adbsalam.annotations.ScreenSnapIt
 import com.adbsalam.annotations.SnapIt
 
 @Composable
@@ -24,7 +23,11 @@ fun GreetingPreview() {
 
 @Preview
 @Composable
-@ScreenSnapIt(name = "when in preview, should say Something", preview = true)
-fun GreetingsThirdPreview() {
+@SnapIt(
+    name = "when in preview, should say Something",
+    isScreen = true,
+    preview = true
+)
+fun GreetingsScreenPreview() {
     Greeting(name = "SomeOtherPreview")
 }

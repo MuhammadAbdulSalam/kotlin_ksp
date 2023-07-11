@@ -19,7 +19,7 @@
    fun `when in preview, should say Something`() {
      paparazzi.captureScreenshot {
          CompositionLocalProvider(LocalInspectionMode provides true) {
-             GreetingsThirdPreview()
+             GreetingsScreenPreview()
          }
      }
    }
