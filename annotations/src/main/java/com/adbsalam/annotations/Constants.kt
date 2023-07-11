@@ -4,12 +4,13 @@ enum class SnapAnnotations(
     val annotation: String,
     val packageName: String
 ) {
-    SNAP_IT_COMPONENT(
-        "SnapItComponent",
-        "com.adbsalam.annotations.SnapItComponent"
+    SNAP_IT(
+        "SnapIt",
+        "com.adbsalam.annotations.SnapIt"
     ),
+
     SNAP_IT_SCREEN(
-        "SnapItScreen",
-        "com.adbsalam.annotations.SnapItScreen"
+        "ScreenSnapIt",
+        "com.adbsalam.annotations.ScreenSnapIt"
     )
 }

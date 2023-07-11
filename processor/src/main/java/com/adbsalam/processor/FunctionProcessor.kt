@@ -26,7 +26,7 @@ class FunctionProcessor(
     ): List<KSAnnotated> {
 
         val componentSymbol = resolver
-            .getSymbolsWithAnnotation(SnapAnnotations.SNAP_IT_COMPONENT.packageName)
+            .getSymbolsWithAnnotation(SnapAnnotations.SNAP_IT.packageName)
             .filterIsInstance<KSFunctionDeclaration>()
 
         val screenSymbol = resolver
@@ -40,7 +40,7 @@ class FunctionProcessor(
             symbols = componentSymbol,
             codeGenerator = codeGenerator,
             resolver = resolver,
-            annotation = SnapAnnotations.SNAP_IT_COMPONENT
+            annotation = SnapAnnotations.SNAP_IT
         ).processSymbols()
 
         //Handle screen symbols

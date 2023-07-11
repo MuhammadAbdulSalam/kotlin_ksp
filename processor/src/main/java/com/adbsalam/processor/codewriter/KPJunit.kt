@@ -42,7 +42,7 @@ internal fun jUnitClass(
 }
 
 private fun paparazziInitializer(annotation: SnapAnnotations): String {
-    return if (annotation == SnapAnnotations.SNAP_IT_COMPONENT)
+    return if (annotation == SnapAnnotations.SNAP_IT)
         "Paparazzi.forComponent()"
     else
         "Paparazzi.forScreen()"

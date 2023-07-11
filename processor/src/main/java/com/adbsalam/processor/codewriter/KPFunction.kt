@@ -65,7 +65,7 @@ fun getMethodName(
     function: KSFunctionDeclaration
 ): String {
     val annotation: KSAnnotation = function.annotations.first {
-        it.shortName.asString() == SnapAnnotations.SNAP_IT_COMPONENT.annotation ||
+        it.shortName.asString() == SnapAnnotations.SNAP_IT.annotation ||
                 it.shortName.asString() == SnapAnnotations.SNAP_IT_SCREEN.annotation
     }
 

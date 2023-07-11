@@ -69,5 +69,4 @@ dependencies {
     implementation(libs.compose.material.three)
     implementation(libs.junit)
     testImplementation(project(":testing"))
-
 }

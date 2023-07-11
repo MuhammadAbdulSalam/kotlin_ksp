@@ -1,13 +1,13 @@
 package com.adbsalam.annotations
 
 @Target(AnnotationTarget.FUNCTION)
-annotation class SnapItComponent(
+annotation class SnapIt(
     val name: String = "",
     val preview : Boolean = false
 )
 
 @Target(AnnotationTarget.FUNCTION)
-annotation class SnapItScreen(
+annotation class ScreenSnapIt(
     val name: String = "",
     val preview : Boolean = false
 )

@@ -2,16 +2,16 @@ package com.adbsalam.greetings
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.adbsalam.annotations.SnapItComponent
+import com.adbsalam.annotations.SnapIt
 
-@SnapItComponent(preview = false)
+@SnapIt(preview = false)
 @Preview
 @Composable
 fun ImagesPreview() {
     Greeting("SecondGreeting")
 }
 
-@SnapItComponent(preview = false)
+@SnapIt(preview = false)
 @Preview
 @Composable
 fun ImagesPreviewSecond() {

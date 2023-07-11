@@ -47,7 +47,7 @@ class CodeWriter(
      *
      */
     private fun getFileName(file: String): String {
-        return if (annotation == SnapAnnotations.SNAP_IT_COMPONENT) {
+        return if (annotation == SnapAnnotations.SNAP_IT) {
             file.replace(".kt", "ComponentTest")
         } else {
             file.replace(".kt", "ScreenTest")

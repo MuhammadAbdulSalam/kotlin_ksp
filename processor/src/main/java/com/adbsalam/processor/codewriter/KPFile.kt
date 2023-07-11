@@ -2,7 +2,6 @@ package com.adbsalam.processor.codewriter
 
 import com.adbsalam.annotations.SnapAnnotations
 import com.adbsalam.annotations.SnapAnnotations.*
-import com.google.devtools.ksp.containingFile
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.squareup.kotlinpoet.FileSpec
 import org.junit.runners.JUnit4
@@ -35,4 +34,4 @@ internal fun kFile(
 }
 
 private fun paparazziInstanceImport(annotation: SnapAnnotations): String =
-    if (annotation == SNAP_IT_COMPONENT) "forComponent" else "forScreen"
+    if (annotation == SNAP_IT) "forComponent" else "forScreen"
