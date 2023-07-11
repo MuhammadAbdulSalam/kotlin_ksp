@@ -11,10 +11,3 @@ import com.adbsalam.annotations.SnapIt
 fun ButtonsPreview() {
     Greeting("SecondGreeting")
 }
-
-@Preview
-@Composable
-@ScreenSnapIt(name = "when not in preview, should load correctly")
-fun ButtonsPreviewSecond() {
-    Greeting(name = "SomeOtherPreview")
-}

@@ -56,8 +56,11 @@ tasks.register("snapItGenerate") {
 }
 
 dependencies {
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
     ksp(project(":processor"))
     implementation(project(":annotations"))
+    lintChecks(project(":snapit_lint"))
 
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.runtime)

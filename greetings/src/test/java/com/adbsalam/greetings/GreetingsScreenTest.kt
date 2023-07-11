@@ -16,15 +16,6 @@
    val paparazzi: Paparazzi = Paparazzi.forScreen()
 
    @Test
-   fun `when in preview, should say SecondGreeting`() {
-     paparazzi.captureScreenshot {
-         CompositionLocalProvider(LocalInspectionMode provides true) {
-             GreetingPreviewSecond()
-         }
-     }
-   }
-
-   @Test
    fun `when in preview, should say Something`() {
      paparazzi.captureScreenshot {
          CompositionLocalProvider(LocalInspectionMode provides true) {

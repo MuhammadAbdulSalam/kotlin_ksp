@@ -24,13 +24,6 @@ fun GreetingPreview() {
 
 @Preview
 @Composable
-@ScreenSnapIt(name = "when in preview, should say SecondGreeting", preview = true)
-fun GreetingPreviewSecond() {
-    Greeting("SecondGreeting")
-}
-
-@Preview
-@Composable
 @ScreenSnapIt(name = "when in preview, should say Something", preview = true)
 fun GreetingsThirdPreview() {
     Greeting(name = "SomeOtherPreview")

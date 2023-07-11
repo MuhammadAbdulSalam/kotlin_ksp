@@ -1,0 +1,25 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm'
+}
+
+archivesBaseName = "read-resolve-check"
+group 'com.stylingandroid.readresolve'
+version '1.0.0'
+
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:1.8.21"
+    compileOnly "com.android.tools.lint:lint-api:31.2.0-alpha11"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "17"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "17"
+}
+
+jar {
+    manifest {
+        attributes("Lint-Registry-v2": "com.adbsalam.snapit_lint.SnapItLint")
+    }
+}
