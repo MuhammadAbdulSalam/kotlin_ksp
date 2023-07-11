@@ -39,7 +39,6 @@ ksp {
 }
 
 tasks.register("snapItRecord"){
-    dependsOn("snapItGenerate")
     dependsOn("recordPaparazzi")
 }
 
@@ -51,7 +50,6 @@ tasks.register("snapItGenerate") {
             into("src/test/java/com/adbsalam/greetings")
             filter { line -> line.replace("//", "") }
         }
-//        delete("build/generated/ksp/debug/kotlin/com/adbsalam")
     }
 }
 

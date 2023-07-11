@@ -82,7 +82,7 @@ private fun commentedFile(
 ): String {
     return FileSpec
         .builder("none", "")
-        .addComment(generatedCode)
+        .addFileComment(generatedCode)
         .build()
         .toString()
         .replaceExtras()
