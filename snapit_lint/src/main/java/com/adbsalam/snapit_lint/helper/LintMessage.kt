@@ -1,4 +1,4 @@
-package com.adbsalam.snapit_lint.issues
+package com.adbsalam.snapit_lint.helper
 
 sealed class LintMessage(val msg: String)
 

@@ -1,9 +1,5 @@
 package com.adbsalam.snapit_lint.helper
 
-import com.adbsalam.snapit_lint.issues.ComposableRequiredMsg
-import com.adbsalam.snapit_lint.issues.LintMessage
-import com.adbsalam.snapit_lint.issues.PrivateModifierNotAllowed
-import com.adbsalam.snapit_lint.issues.ZeroArgumentRequiredMsg
 import com.intellij.lang.jvm.JvmModifier
 import org.jetbrains.uast.UMethod
 

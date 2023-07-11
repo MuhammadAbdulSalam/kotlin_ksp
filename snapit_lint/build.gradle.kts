@@ -13,5 +13,5 @@ java {
 }
 
 tasks.jar {
-    manifest.attributes["Lint-Registry-v2"] = "com.adbsalam.snapit_lint.SnapItLint"
+    manifest.attributes["Lint-Registry-v2"] = "com.adbsalam.snapit_lint.SnapItIssueRegistry"
 }

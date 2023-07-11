@@ -1,4 +1,4 @@
-package com.adbsalam.snapit_lint.issues
+package com.adbsalam.snapit_lint
 
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category
@@ -13,7 +13,7 @@ import org.jetbrains.uast.UMethod
 
 object SnapItIssues {
     private const val ID = "SnapItValidation"
-    private const val PRIORITY = 7
+    private const val PRIORITY = 10
     private const val DESCRIPTION = "Following are the key rules to use SnapIt"
     private const val EXPLANATION = """
         - functions must not be private

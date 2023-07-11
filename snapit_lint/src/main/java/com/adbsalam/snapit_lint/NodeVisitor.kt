@@ -1,8 +1,8 @@
-package com.adbsalam.snapit_lint.issues
+package com.adbsalam.snapit_lint
 
 import com.adbsalam.snapit_lint.helper.errors
 import com.adbsalam.snapit_lint.helper.hasSnapIt
-import com.adbsalam.snapit_lint.issues.SnapItIssues.ISSUE
+import com.adbsalam.snapit_lint.SnapItIssues.ISSUE
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.JavaContext
 import org.jetbrains.uast.UMethod
