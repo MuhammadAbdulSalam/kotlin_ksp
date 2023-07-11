@@ -1,6 +1,6 @@
 package com.adbsalam.processor
 
-import com.adbsalam.annotations.ANNOTATION_PACKAGE_NAME
+import com.adbsalam.annotations.SnapAnnotations
 import com.adbsalam.processor.codewriter.CodeWriter
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.KSPLogger
@@ -24,20 +24,36 @@ class FunctionProcessor(
     override fun process(
         resolver: Resolver
     ): List<KSAnnotated> {
-        val symbols = resolver
-            .getSymbolsWithAnnotation(ANNOTATION_PACKAGE_NAME)
+
+        val componentSymbol = resolver
+            .getSymbolsWithAnnotation(SnapAnnotations.SNAP_IT_COMPONENT.packageName)
             .filterIsInstance<KSFunctionDeclaration>()
 
-        if (!symbols.iterator().hasNext()) return emptyList()
+        val screenSymbol = resolver
+            .getSymbolsWithAnnotation(SnapAnnotations.SNAP_IT_SCREEN.packageName)
+            .filterIsInstance<KSFunctionDeclaration>()
 
-        val codeWriter = CodeWriter(
-            symbols = symbols,
+        if (!componentSymbol.iterator().hasNext()) return emptyList()
+
+        //Handle component symbols
+        CodeWriter(
+            symbols = componentSymbol,
             codeGenerator = codeGenerator,
             resolver = resolver,
-        )
+            annotation = SnapAnnotations.SNAP_IT_COMPONENT
+        ).processSymbols()
 
-        codeWriter.processSymbols()
+        //Handle screen symbols
+        if (screenSymbol.iterator().hasNext()) {
+            CodeWriter(
+                symbols = screenSymbol,
+                codeGenerator = codeGenerator,
+                resolver = resolver,
+                annotation = SnapAnnotations.SNAP_IT_SCREEN
+            ).processSymbols()
+        }
 
+        val symbols = componentSymbol + screenSymbol
         return symbols.filterNot { it.validate() }.toList()
     }
 

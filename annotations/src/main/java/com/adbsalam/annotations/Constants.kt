@@ -1,3 +1,15 @@
 package com.adbsalam.annotations
 
-const val ANNOTATION_PACKAGE_NAME = "com.adbsalam.annotations.SnapIt"
+enum class SnapAnnotations(
+    val annotation: String,
+    val packageName: String
+) {
+    SNAP_IT_COMPONENT(
+        "SnapItComponent",
+        "com.adbsalam.annotations.SnapItComponent"
+    ),
+    SNAP_IT_SCREEN(
+        "SnapItScreen",
+        "com.adbsalam.annotations.SnapItScreen"
+    )
+}

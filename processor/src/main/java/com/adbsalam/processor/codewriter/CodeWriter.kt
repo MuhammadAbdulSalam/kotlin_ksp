@@ -1,5 +1,6 @@
 package com.adbsalam.processor.codewriter
 
+import com.adbsalam.annotations.SnapAnnotations
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.Resolver
@@ -10,7 +11,8 @@ import java.io.OutputStream
 class CodeWriter(
     private val symbols: Sequence<KSFunctionDeclaration>,
     private val codeGenerator: CodeGenerator,
-    private val resolver: Resolver
+    private val resolver: Resolver,
+    private val annotation: SnapAnnotations
 ) {
 
     /**
@@ -23,7 +25,7 @@ class CodeWriter(
         }.toSet()
 
         fileNames.forEach { currentFile ->
-            val fileName = currentFile.replace(".kt", "SnapTest")
+            val fileName = getFileName(currentFile)
             val currentFileSymbols = symbols.filter { it.containingFile?.fileName == currentFile }
             val previewImports = currentFileSymbols.any { requirePreviewContext(it) }
             val file = createGeneratorFile(fileName = fileName)
@@ -44,6 +46,17 @@ class CodeWriter(
     /**
      *
      */
+    private fun getFileName(file: String): String {
+        return if (annotation == SnapAnnotations.SNAP_IT_COMPONENT) {
+            file.replace(".kt", "ComponentTest")
+        } else {
+            file.replace(".kt", "ScreenTest")
+        }
+    }
+
+    /**
+     *
+     */
     private fun codeFile(
         previewImports: Boolean,
         fileName: String,
@@ -53,12 +66,14 @@ class CodeWriter(
         val kPoetFile = kFile(
             previewImports,
             fileName,
-            currentFileSymbols
+            currentFileSymbols,
+            annotation
         )
 
         val junitClass = jUnitClass(
             fileName,
-            currentFileSymbols
+            currentFileSymbols,
+            annotation
         )
 
         return kPoetFile

@@ -11,23 +11,32 @@
  import org.junit.runners.JUnit4
 
  @RunWith(JUnit4::class)
- class ButtonsSnapTest {
+ class GreetingsComponentTest {
    @get:Rule
    val paparazzi: Paparazzi = Paparazzi.forComponent()
 
    @Test
-   fun `when in preview, should load correctly`() {
+   fun `when not preview, Should says Android`() {
+     paparazzi.captureScreenshot {
+         GreetingPreview()
+     }
+   }
+
+   @Test
+   fun `when in preview, should say SecondGreeting`() {
      paparazzi.captureScreenshot {
          CompositionLocalProvider(LocalInspectionMode provides true) {
-             ButtonsPreview()
+             GreetingPreviewSecond()
          }
      }
    }
 
    @Test
-   fun `when not in preview, should load correctly`() {
+   fun `when in preview, should say Something`() {
      paparazzi.captureScreenshot {
-         ButtonsPreviewSecond()
+         CompositionLocalProvider(LocalInspectionMode provides true) {
+             GreetingsThirdPreview()
+         }
      }
    }
  }
