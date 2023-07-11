@@ -24,7 +24,6 @@ fun GreetingPreview() {
 @Preview
 @Composable
 @SnapIt(
-    name = "when in preview, should say Something",
     isScreen = true,
     preview = true
 )

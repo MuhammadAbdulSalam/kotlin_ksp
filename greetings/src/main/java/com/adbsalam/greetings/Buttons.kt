@@ -6,10 +6,7 @@ import com.adbsalam.annotations.SnapIt
 
 @Preview
 @Composable
-@SnapIt(
-    name = "when in preview, should load correctly",
-    preview = true
-)
+@SnapIt(preview = true)
 fun ButtonsPreview() {
     Greeting("SecondGreeting")
 }

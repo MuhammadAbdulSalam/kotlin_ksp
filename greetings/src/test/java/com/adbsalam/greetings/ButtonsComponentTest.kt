@@ -16,7 +16,7 @@
    val paparazzi: Paparazzi = Paparazzi.forComponent()
 
    @Test
-   fun `when in preview, should load correctly`() {
+   fun buttonsPreviewSnapTest() {
      paparazzi.captureScreenshot {
          CompositionLocalProvider(LocalInspectionMode provides true) {
              ButtonsPreview()
