@@ -16,9 +16,9 @@ object SnapItIssues {
     private const val PRIORITY = 7
     private const val DESCRIPTION = "Following are the key rules to use SnapIt"
     private const val EXPLANATION = """
-        - Methods must not be private
-        - Methods must be @Composable
-        - Cannot use @SnapIt and @ScreenSnapIt for same method
+        - functions must not be private
+        - functions must be @Composable
+        - Cannot use @SnapIt and @ScreenSnapIt for same function
         - Fix these issues to proceed a build
     """
     private val CATEGORY = Category.CUSTOM_LINT_CHECKS
