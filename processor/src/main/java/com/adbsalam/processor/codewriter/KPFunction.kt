@@ -8,7 +8,12 @@ import com.squareup.kotlinpoet.FunSpec
 import org.junit.Test
 
 /**
+ * @param functions functions to be processes
  *
+ * @return list of functions to be added to file,
+ * processes and generates functions based on param preview
+ * if preview = true then generate function with local inspection mode true
+ * else create a basic snap test function
  */
 internal fun snapFunctions(
     functions: Sequence<KSFunctionDeclaration>
@@ -23,7 +28,8 @@ internal fun snapFunctions(
 }
 
 /**
- *
+ * @param function function to be processed
+ * @return returns a function with capture screenshot commands
  */
 internal fun nonPreviewFuncSpec(
     function: KSFunctionDeclaration
@@ -41,7 +47,9 @@ internal fun nonPreviewFuncSpec(
 }
 
 /**
- *
+ * @param function function to be processed
+ * @return returns a function with capture screenshot commands
+ * and set inspection mode true command
  */
 internal fun previewFuncSpec(
     function: KSFunctionDeclaration
@@ -60,6 +68,13 @@ internal fun previewFuncSpec(
         .build()
 }
 
+/**
+ * @param function to be processed
+ * @return Function name based on param value of name: String
+ * if a name:String value exists then use it as function name
+ * if no name:String value exists then use current function name and add SnapTest at end
+ * example "Greetings" function will generate greetingsSnapTest() function name
+ */
 fun getMethodName(
     function: KSFunctionDeclaration
 ): String {

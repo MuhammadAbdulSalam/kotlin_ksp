@@ -13,16 +13,22 @@ import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.validate
 import java.io.OutputStream
 
+/**
+ * @param logger to present logs from processor
+ * @param codeGenerator code generator context to create new files
+ *
+ */
 class FunctionProcessor(
-    private val options: Map<String, String>,
     private val logger: KSPLogger,
     private val codeGenerator: CodeGenerator,
 ) : SymbolProcessor {
 
-    operator fun OutputStream.plusAssign(str: String) {
-        this.write(str.toByteArray())
-    }
-
+    /**
+     * Process annotations and create new code files
+     * If no annotations exist then return empty array
+     * Filter through symbols and separate out functions based on preview: param
+     * Processed preview and non preview functions separately
+     */
     override fun process(
         resolver: Resolver
     ): List<KSAnnotated> {
@@ -31,15 +37,12 @@ class FunctionProcessor(
             .getSymbolsWithAnnotation(SNAP_IT_PACKAGE)
             .filterIsInstance<KSFunctionDeclaration>()
 
-        if (!symbols.iterator().hasNext()) return emptyList()
-
-        val componentSymbol = symbols.filter {
-            !isScreenComponent(it)
+        if (!symbols.iterator().hasNext()) {
+            logger.info("No Symbols to be processed")
+            return emptyList()
         }
 
-        val screenSymbols = symbols.filter {
-            isScreenComponent(it)
-        }
+        val componentSymbol = symbols.filter { !isScreenComponent(it) }
 
         if (componentSymbol.iterator().hasNext()) {
             processSymbols(
@@ -49,6 +52,8 @@ class FunctionProcessor(
                 annotation = AnnotationType.COMPONENT
             )
         }
+
+        val screenSymbols = symbols.filter { isScreenComponent(it) }
 
         if (screenSymbols.iterator().hasNext()) {
             processSymbols(

@@ -8,7 +8,15 @@ import com.squareup.kotlinpoet.FileSpec
 import java.io.OutputStream
 
 /**
+ * @param codeGenerator code generator instance from processor to create new files
+ * @param resolver resolver instance to be passed
+ * @param symbols symbols that needs to be processed
+ * @param annotation current annotation type being used, i.e Screen or Component
  *
+ * This function acts as entry point to code generation
+ * filters symbols based on correct params, and annotations
+ * generated, File, JUnit4 class and functions needed
+ * Write file to generated folder and close stream
  */
 fun processSymbols(
     codeGenerator: CodeGenerator,
@@ -46,7 +54,17 @@ fun processSymbols(
 }
 
 /**
+ * @param previewImports are preview context imports required
+ * @param fileName name of file to be used
+ * @param symbols current symbols to be processed
+ * @param annotation current annotation to be processed
  *
+ * This function will generate the code file for given symbols,
+ * process includes creating a new .kt file
+ * then write a JUnit4 test class
+ * generate test functions for each symbol
+ *
+ * @return returns the new generated file
  */
 private fun codeFile(
     previewImports: Boolean,
@@ -75,7 +93,14 @@ private fun codeFile(
 }
 
 /**
+ * @param generatedCode generated code for file as String
+ * @return returns a commented file that can be used in generated files
  *
+ * Reason for commented file is that paparazzi or test implementations will not work in generated folders
+ * to get pass this stage we generate a commented file that is then moved to test package and uncommented
+ * in this way generate build code folder will not cause build errors
+ *
+ * @return returns generated code in commented form
  */
 private fun commentedFile(
     generatedCode: String
@@ -89,7 +114,11 @@ private fun commentedFile(
 }
 
 /**
+ * @param fileName name of file to be used
+ * @param codeGenerator instance of code generator
+ * @param resolver resolver context to be used
  *
+ * @return this function returns a new generated file
  */
 private fun createGeneratorFile(
     fileName: String,

@@ -9,7 +9,15 @@ import com.squareup.kotlinpoet.TypeSpec
 import org.junit.Rule
 import org.junit.runner.RunWith
 
-
+/**
+ * @param fileName file name currently being used to name class same as file name
+ * @param symbols symbols to be processes to add functions for each
+ * @param annotation current annotation type if test is forComponent or forScreen
+ *
+ * @return returns a JUnit4 Class with based on annotation type.
+ * If annotation is Screen then create and import instance of paparazzi.forScreen()
+ * else create instance of paparazzi.forComponent
+ */
 internal fun jUnitClass(
     fileName: String,
     symbols: Sequence<KSFunctionDeclaration>,
@@ -40,7 +48,13 @@ internal fun jUnitClass(
         .build()
 }
 
-private fun paparazziInitializer(annotation: AnnotationType): String {
+/**
+ * @param annotation annotation to be processes
+ * return correct instance of paparazzi to be used for either screen or component
+ */
+private fun paparazziInitializer(
+    annotation: AnnotationType
+): String {
     return if (annotation == AnnotationType.COMPONENT)
         "Paparazzi.forComponent()"
     else

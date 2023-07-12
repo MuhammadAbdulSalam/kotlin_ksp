@@ -6,7 +6,14 @@ import com.squareup.kotlinpoet.FileSpec
 import org.junit.runners.JUnit4
 
 /**
+ * @param previewImports if file require preview imports true else false
+ * @param fileName name of file to be used
+ * @param functions current symbols to be processed in current file
+ * @param annotation type of annotation being processed
  *
+ * @return Returns a file spec that includes following
+ * All needed Imports
+ * File name and Test annotations needed
  */
 internal fun kFile(
     previewImports: Boolean,
@@ -32,5 +39,14 @@ internal fun kFile(
     return file
 }
 
-private fun paparazziInstanceImport(annotation: AnnotationType): String =
+/**
+ * @param annotation type of annotation to be processed
+ * This is to initiate paparazzi instance such as
+ * val paparazzi = Paparazzi.forComponent()
+ * val paparazzi = Paparazzi.forScreen()
+ * based on what annotation is being used
+ */
+private fun paparazziInstanceImport(
+    annotation: AnnotationType
+): String =
     if (annotation == COMPONENT) "forComponent" else "forScreen"
