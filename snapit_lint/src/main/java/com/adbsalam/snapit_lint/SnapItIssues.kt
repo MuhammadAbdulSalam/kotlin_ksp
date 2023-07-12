@@ -11,7 +11,17 @@ import com.android.tools.lint.detector.api.Severity
 import org.jetbrains.uast.UElement
 import org.jetbrains.uast.UMethod
 
-object SnapItIssues {
+/**
+ * Create a SnapIt Issue to add for Linter
+ *
+ * These are general properties of Lint issues with severity set to highest,
+ * Since code cannot be generated if any lint issues exist
+ *
+ * @property ID = "SnapItValidation"
+ * @property PRIORITY = 10
+ * @property DESCRIPTION = "Following are the key rules to use SnapIt"
+ */
+internal object SnapItIssues {
     private const val ID = "SnapItValidation"
     private const val PRIORITY = 10
     private const val DESCRIPTION = "Following are the key rules to use SnapIt"

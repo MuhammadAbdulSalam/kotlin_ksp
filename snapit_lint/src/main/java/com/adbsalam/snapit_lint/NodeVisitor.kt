@@ -7,7 +7,13 @@ import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.JavaContext
 import org.jetbrains.uast.UMethod
 
-class NodeVisitor(
+/**
+ * Node visitor to process code
+ * This will help generate lint error based on code issues
+ *
+ * severity is set to high
+ */
+internal class NodeVisitor(
     private val context: JavaContext
 ) : UElementHandler() {
 

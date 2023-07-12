@@ -3,28 +3,63 @@ package com.adbsalam.snapit_lint.helper
 import com.intellij.lang.jvm.JvmModifier
 import org.jetbrains.uast.UMethod
 
-fun UMethod.hasSnapIt(
+/**
+ * Annotation Name as String
+ */
+const val SNAP_IT = "SnapIt"
+
+/**
+ * Annotation Package name
+ */
+const val PACKAGE_NAME = "com.adbsalam.annotations."
+
+/**
+ * Composable annotation full name as String
+ */
+const val COMPOSABLE = "androidx.compose.runtime.Composable"
+
+/**
+ * Return annotation name with package name
+ */
+internal fun String.byPackage() = PACKAGE_NAME + this
+
+/**
+ * @return true if method contains a SnapIt annotation
+ */
+internal fun UMethod.hasSnapIt(
 ): Boolean {
     return this.annotations.firstOrNull {
         it.qualifiedName == SNAP_IT.byPackage()
     } != null
 }
 
-fun UMethod.isComposable(): Boolean {
+/**
+ * @return true if method contains Composable annotation
+ */
+internal fun UMethod.isComposable(): Boolean {
     return this.annotations.firstOrNull {
         it.qualifiedName == COMPOSABLE
     } != null
 }
 
-fun UMethod.hasParams(): Boolean {
+/**
+ * @return true if function have 1 or more params
+ */
+internal fun UMethod.hasParams(): Boolean {
     return this.hasParameters()
 }
 
-fun UMethod.isPrivate(): Boolean {
+/**
+ * @return true if function have private modifier
+ */
+internal fun UMethod.isPrivate(): Boolean {
     return this.hasModifier(JvmModifier.PRIVATE)
 }
 
-fun UMethod.errors(): LintMessage? {
+/**
+ * @return LintError to be shown on Editor
+ */
+internal fun UMethod.errors(): LintMessage? {
     return when {
         !this.isComposable() -> ComposableRequiredMsg(SNAP_IT)
         this.hasParams() -> ZeroArgumentRequiredMsg(SNAP_IT)
