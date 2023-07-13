@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.kotlin.ksp)
     alias(libs.plugins.paparazzi)
+    id("SnapItPlugin")
 }
 
 android {

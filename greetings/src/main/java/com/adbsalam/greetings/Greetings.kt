@@ -7,7 +7,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.adbsalam.annotations.SnapIt
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(
+    name: String,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = "Hello $name!",
         modifier = modifier
