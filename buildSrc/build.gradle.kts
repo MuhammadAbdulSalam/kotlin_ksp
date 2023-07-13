@@ -1,11 +1,10 @@
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.kotlin.ksp)
 }
 
-//dependencies {
-//    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
-//    implementation("com.android.tools.build:gradle:3.5.3")
-//}
+dependencies {
+}
 
 gradlePlugin {
     plugins {

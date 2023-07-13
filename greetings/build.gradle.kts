@@ -43,17 +43,6 @@ tasks.register("snapItRecord"){
     dependsOn("recordPaparazzi")
 }
 
-tasks.register("snapItGenerate") {
-    dependsOn("assembleDebug")
-    doLast{
-        copy {
-            from("build/generated/ksp/debug/kotlin/com/adbsalam")
-            into("src/test/java/com/adbsalam/greetings")
-            filter { line -> line.replace("//", "") }
-        }
-    }
-}
-
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
