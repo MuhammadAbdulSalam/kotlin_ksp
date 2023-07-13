@@ -43,6 +43,10 @@ tasks.register("snapItRecord"){
     dependsOn("recordPaparazzi")
 }
 
+snapItTestDestination {
+   "com/adbsalam/greetings"
+}
+
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 

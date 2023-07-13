@@ -2,7 +2,7 @@ package com.adbsalam.processor.codewriter
 
 import java.io.OutputStream
 
-const val PACKAGE_NAME = "com.adbsalam"
+const val PACKAGE_NAME = "com.adbsalam.snapit"
 const val UNKNOWN_FILE = "UnknownFileName"
 const val PAPARAZZI_PACKAGE = "com.adbsalam.testing"
 
