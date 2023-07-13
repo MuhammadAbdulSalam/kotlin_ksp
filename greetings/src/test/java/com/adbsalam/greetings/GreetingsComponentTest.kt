@@ -19,6 +19,13 @@
          GreetingPreview()
      }
    }
+
+   @Test
+   fun `when not preview, another Should says Android`() {
+     paparazzi.captureScreenshot {
+         GreetingPreviewSecond()
+     }
+   }
  }
 
 

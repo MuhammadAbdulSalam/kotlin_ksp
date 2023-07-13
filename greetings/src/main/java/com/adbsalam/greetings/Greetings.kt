@@ -26,6 +26,13 @@ fun GreetingPreview() {
 
 @Preview
 @Composable
+@SnapIt(name = "when not preview, another Should says Android")
+fun GreetingPreviewSecond() {
+    Greeting("Android")
+}
+
+@Preview
+@Composable
 @SnapIt(
     isScreen = true,
     preview = true
