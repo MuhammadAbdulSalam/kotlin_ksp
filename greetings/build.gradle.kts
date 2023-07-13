@@ -38,12 +38,12 @@ ksp {
     arg("ignoreGenericArgs", "false")
 }
 
-tasks.register("snapItRecord"){
+tasks.register("snapItRecord") {
     dependsOn("recordPaparazzi")
 }
 
-snapItTestDestination {
-   "com/adbsalam/greetings"
+snapIt {
+    testDir("com/adbsalam/greetings")
 }
 
 dependencies {

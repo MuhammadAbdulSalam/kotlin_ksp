@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
 }
 
+version = "1.0.0"
+
 gradlePlugin {
     plugins {
         create("SnapIt") {
