@@ -8,12 +8,12 @@ class SnapItPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         project.tasks.register<Copy>("snapItGenerate") {
+            dependsOn("assemble")
             val packagePath = File("${project.buildDir}/snapIt", "snap_config.txt").readText()
-            dependsOn("assembleDebug")
             from("build/generated/ksp/debug/kotlin/com/adbsalam/snapit/")
             into("src/test/java/$packagePath")
             filter { line -> line.replace("//", "") }
         }
-    }
 
+    }
 }

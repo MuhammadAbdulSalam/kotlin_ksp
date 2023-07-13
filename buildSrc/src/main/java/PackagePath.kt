@@ -2,13 +2,20 @@ import org.gradle.api.Project
 import java.io.File
 import java.lang.System.out
 
-const val testDestination = "snap_test_destination"
+const val snapItConfigFile = "snap_config.txt"
+const val srcTestPath = "src/test/java/"
+const val snapIt = "snapIt"
 
 fun Project.snapItTestDestination(packagePath: () -> String) {
-    val path = packagePath().replace("src/test/java/", "")
+    val path = packagePath().replace(srcTestPath, "")
     val directory = "${this.buildDir}"
-    File(directory, "snapIt").mkdir()
-    File("$directory/snapIt", "snap_config.txt").printWriter().use { writer ->
+    var buildDir = File(directory)
+    if (!buildDir.exists()) {
+        buildDir.mkdir()
+    }
+    File(directory, snapIt).mkdir()
+    File("$directory/$snapIt", snapItConfigFile).printWriter().use { writer ->
         writer.write(path)
     }
+
 }
