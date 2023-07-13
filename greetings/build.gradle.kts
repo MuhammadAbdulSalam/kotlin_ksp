@@ -2,8 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.kotlin.ksp)
-    alias(libs.plugins.paparazzi)
-    id("SnapItPlugin")
+    id("SnapIt")
 }
 
 android {
@@ -48,12 +47,6 @@ snapItTestDestination {
 }
 
 dependencies {
-    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
-    ksp(project(":processor"))
-    implementation(project(":annotations"))
-    lintChecks(project(":snapit_lint"))
-
     implementation(platform(libs.compose.bom))
     implementation(libs.compose.runtime)
     implementation(libs.compose.foundation)
@@ -63,5 +56,4 @@ dependencies {
     implementation(libs.compose.material.icons.extended)
     implementation(libs.compose.material.three)
     implementation(libs.junit)
-    testImplementation(project(":testing"))
 }

@@ -17,5 +17,4 @@ fun Project.snapItTestDestination(packagePath: () -> String) {
     File("$directory/$snapIt", snapItConfigFile).printWriter().use { writer ->
         writer.write(path)
     }
-
 }

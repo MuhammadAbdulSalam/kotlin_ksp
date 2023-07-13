@@ -3,14 +3,11 @@ plugins {
     alias(libs.plugins.kotlin.ksp)
 }
 
-dependencies {
-}
-
 gradlePlugin {
     plugins {
-        create("SnapItPlugin") {
-            id = "SnapItPlugin"
-            implementationClass = "SnapItPlugin"
+        create("SnapIt") {
+            id = "SnapIt"
+            implementationClass = "SnapIt"
         }
     }
 }
