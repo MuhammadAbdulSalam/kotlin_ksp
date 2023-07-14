@@ -17,6 +17,7 @@ internal fun Project.snapItGenerateTask() {
                 throw snapItExtentionException
             }
             dependsOn("assemble")
+
             from("build/generated/ksp/debug/kotlin/com/adbsalam/snapit/")
             into("src/test/java/${extension.testDir.get()}")
             filter { line -> line.replace("//", "") }

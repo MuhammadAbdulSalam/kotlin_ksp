@@ -30,16 +30,6 @@ android {
     }
 }
 
-kotlin.sourceSets.main {
-    kotlin.srcDirs(
-        file("build/generated/ksp/kotlin"),
-    )
-}
-
-ksp {
-    arg("ignoreGenericArgs", "false")
-}
-
 snapIt {
     testDir("com/adbsalam/greetings")
 }
