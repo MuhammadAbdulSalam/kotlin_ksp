@@ -1,8 +1,10 @@
+import com.adbsalam.snapit.snapIt
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.kotlin)
     alias(libs.plugins.kotlin.ksp)
-    id("SnapIt")
+    id("com.adbsalam.snapit")
 }
 
 android {
@@ -36,10 +38,6 @@ kotlin.sourceSets.main {
 
 ksp {
     arg("ignoreGenericArgs", "false")
-}
-
-tasks.register("snapItRecord") {
-    dependsOn("recordPaparazzi")
 }
 
 snapIt {

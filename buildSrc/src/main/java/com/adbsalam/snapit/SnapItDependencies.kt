@@ -1,3 +1,5 @@
+package com.adbsalam.snapit
+
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.project
