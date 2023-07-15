@@ -20,3 +20,6 @@ rootProject.name = "ksp"
 include(":app")
 include(":annotations")
 include(":processor")
+include(":greetings")
+include(":testing")
+include(":snapit_lint")

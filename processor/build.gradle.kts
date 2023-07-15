@@ -10,4 +10,8 @@ java {
 dependencies {
     implementation(project(":annotations"))
     implementation(libs.google.ksp)
+    implementation(libs.junit)
+    implementation(libs.paparazzi)
+    implementation(libs.kotlin.poet.ksp)
+    implementation(libs.kotlin.poet)
 }

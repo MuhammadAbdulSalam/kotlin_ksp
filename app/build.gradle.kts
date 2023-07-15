@@ -46,19 +46,8 @@ android {
 
 }
 
-kotlin.sourceSets.main {
-    kotlin.srcDirs(
-        file("build/generated/ksp/debug/kotlin"),
-    )
-}
-
-ksp {
-    arg("ignoreGenericArgs", "false")
-}
-
 dependencies {
-    ksp(project(":processor"))
-    implementation(project(":annotations"))
+    implementation(project(":greetings"))
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
